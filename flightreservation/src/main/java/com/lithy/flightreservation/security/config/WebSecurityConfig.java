@@ -10,9 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-//because it's the configuration for all the system
-@EnableWebSecurity
-// activate the security layer from spring for all the application
+@EnableWebSecurity //enables the entire security infrastructure of spring
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
@@ -32,8 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		// pass the uri, urls that needs to be authenticated
 		http.authorizeRequests()
-				.antMatchers("/showReg", "/", "/index.html", "/registerUser", "/login", "/showLogin", "/login/*")
-				.permitAll().antMatchers("/admin/showAddFlight").hasAnyAuthority("ADMIN").anyRequest().authenticated()
-				.and().csrf().disable();
+			.antMatchers("/showReg", "/", "/index.html", "/registerUser", "/login", "/showLogin", "/login/*").permitAll()
+			.antMatchers("/admin/showAddFlight").hasAnyAuthority("ADMIN").anyRequest().authenticated().and().csrf().disable();
 	}
 }
